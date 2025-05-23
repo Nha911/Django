@@ -31,7 +31,7 @@ def admin(request):
     return redirect('/admin/')
 
 def category(request):
-    categories = Category.objects.all()
+    categories = Category.objects.all().order_by('id')
     return render(request, 'category.html', {'categories': categories})
 
 def contact(request):
@@ -66,8 +66,8 @@ def edit_category(request, category_id):
         return HttpResponse("Category not found", status=404)
 
     if request.method == 'POST':
-        category.name = request.POST['name']
-        category.description = request.POST['description']
+        category.name = request.POST.get('name', category.name)
+        category.description = request.POST.get('description', category.description)
         category.save()
         return redirect('category')
 
@@ -110,5 +110,6 @@ def Home(request):
     return render(request=request, template_name='home.html')
 
 def product(request):
-    products = Product.objects.all()
+    products = Product.objects.all().order_by('id')
     return render(request, 'product.html', {'products': products})
+
