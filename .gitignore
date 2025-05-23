@@ -1,17 +1,27 @@
+# Dependency directories
 node_modules/
-package.json
-package-lock.json
-node.md
 venv/
-src/
+
+# Python bytecode
+__pycache__/
+
+# Django files
 db.sqlite3
 manage.py
-__pycache__/
 migrations/
 static/
+src/
+
+# Node.js files
+package.json
+package-lock.json
+
+# Python app files
 __init__.py
 admin.py
 apps.py
 models.py
 tests.py
+
+# Markdown/Docs
 node.md
