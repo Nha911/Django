@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About | My Web App{% endblock title %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row align-items-center">
+        <div class="col-md-6 mb-4 mb-md-0">
+            <img src="../static/image/image.png"
+                class="img-fluid rounded-4 shadow" alt="About Us Image">
+        </div>
+        <div class="col-md-6">
+            <h1 class="mb-4 fw-bold" style="font-size:2.5rem; color:#43e97b;">About Our Web App</h1>
+            <p class="fs-5 text-dark mb-3">
+                Welcome to our modern Django web application!<br>
+                We combine technology and design to deliver a clean, responsive, and user-friendly experience for your
+                business.
+            </p>
+            <ul class="list-unstyled mb-4">
+                <li class="mb-2"><span class="fw-bold text-success">&#10003;</span> Category and Product management
+                    with full CRUD operations
+                </li>
+                <li class="mb-2"><span class="fw-bold text-success">&#10003;</span> Database-backed persistence for
+                    all data
+                </li>
+                <li class="mb-2"><span class="fw-bold text-success">&#10003;</span> Consistent navigation and layout
+                    across all pages
+                </li>
+                <li class="mb-2"><span class="fw-bold text-success">&#10003;</span> Modern UI using Bootstrap and
+                    Tailwind
+                </li>
+            </ul>
+            <div class="fs-5 fw-semibold text-secondary mb-2">Team 208 &mdash; Building reliable web solutions for
+                your business.
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
