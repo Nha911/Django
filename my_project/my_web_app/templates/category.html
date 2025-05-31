@@ -5,14 +5,13 @@
 {% endblock title %}
 
 {% block content %}
-    <h1 class="text-center my-4">Category Details</h1>
+    <h1 class="text-center my-4">Observer</h1>
     <div class="table-responsive">
-    <table class="table table-bordered table-hover table-striped table-sm align-middle">
+    <table class="table table-bordered table-hover table-striped table-sm align-middle text-center">
         <thead class="table-dark">
             <tr>
-                <th>ID</th>
+                <th>Observer​ ID</th>
                 <th>Name</th>
-                <th>Description</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -22,7 +21,6 @@
                 <tr>
                     <td>{{ category.id }}</td>
                     <td>{{ category.name }}</td>
-                    <td>{{ category.description }}</td>
                     <td>
                         <a class="btn btn-sm btn-primary me-1" href="{% url 'edit_category' category.id %}">Edit</a>
                         <a class="btn btn-sm btn-danger" href="{% url 'delete_category' category.id %}">Delete</a>
@@ -31,7 +29,7 @@
                 {% endfor %}
             {% else %}
                 <tr>
-                    <td colspan="5" class="text-center">No category data available.</td>
+                    <td colspan="3" class="text-center">No category data available.</td>
                 </tr>
             {% endif %}
         </tbody>

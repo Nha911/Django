@@ -1,5 +1,8 @@
 from django.shortcuts import render, HttpResponse, redirect
 from .models import Category, Product, ProductImage
+from django.contrib.auth.decorators import login_required, user_passes_test
+
+# views.py (write logic using those models)
 
 def about(request):
     return render(request=request, template_name='about.html')
@@ -7,20 +10,18 @@ def about(request):
 def add_category(request):
     if request.method == 'POST':
         name = request.POST['name']
-        description = request.POST['description']
-        Category.objects.create(name=name, description=description)
+        Category.objects.create(name=name)
         return redirect('category')
     return render(request, 'add_category.html')
+
 
 def add_product(request):
     if request.method == 'POST':
         name = request.POST['name']
-        description = request.POST['description']
         price = request.POST['price']
         stock = request.POST['stock']
         Product.objects.create(
             name=name,
-            description=description,
             price=price,
             stock=stock
         )
@@ -67,7 +68,6 @@ def edit_category(request, category_id):
 
     if request.method == 'POST':
         category.name = request.POST.get('name', category.name)
-        category.description = request.POST.get('description', category.description)
         category.save()
         return redirect('category')
 
@@ -87,21 +87,12 @@ def edit_product(request, product_id):
         # Main image (for online URL or local file)
         image_url = request.POST.get('image', '').strip()
         if image_url:
-            # If using ImageField, clear it if a URL is provided
             product.image = None
             product.save()
-            # Save as ProductImage if not already present
             if not ProductImage.objects.filter(product=product, image_url=image_url).exists():
                 ProductImage.objects.create(product=product, image_url=image_url)
         else:
             product.save()
-        # Handle extra images (comma separated URLs)
-        extra_images = request.POST.get('extra_images', '')
-        if extra_images:
-            urls = [url.strip() for url in extra_images.split(',') if url.strip()]
-            for url in urls:
-                if not ProductImage.objects.filter(product=product, image_url=url).exists():
-                    ProductImage.objects.create(product=product, image_url=url)
         return redirect('product')
 
     return render(request, 'edit_product.html', {'product': product})
