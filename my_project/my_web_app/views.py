@@ -84,18 +84,25 @@ def edit_product(request, product_id):
         product.name = request.POST['name']
         product.price = request.POST['price']
         product.stock = request.POST['stock']
-        # Main image (for online URL or local file)
         image_url = request.POST.get('image', '').strip()
-        if image_url:
-            product.image = None
+        image_file = request.FILES.get('image_file')
+        saved = False
+        if image_file:
+            product.image = image_file
             product.save()
+            saved = True
+        if image_url:
+            # Only add ProductImage if the URL is valid and not already present
             if not ProductImage.objects.filter(product=product, image_url=image_url).exists():
                 ProductImage.objects.create(product=product, image_url=image_url)
-        else:
+            saved = True
+        if not saved:
             product.save()
         return redirect('product')
 
-    return render(request, 'edit_product.html', {'product': product})
+    # Pre-fill the image URL field with the latest ProductImage if it exists
+    latest_image_url = product.images.last().image_url if product.images.exists() else ''
+    return render(request, 'edit_product.html', {'product': product, 'latest_image_url': latest_image_url})
 
 def Home(request):
     return render(request=request, template_name='home.html')
