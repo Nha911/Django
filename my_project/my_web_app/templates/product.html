@@ -26,10 +26,10 @@
                 <td>{{ product.name }}</td>
                 <td>${{ product.price }}</td>
                 <td>{{ product.stock }}</td>
-                <td>
-                    <a class="btn btn-sm btn-primary me-1" href="{% url 'edit_product' product.id %}">Edit</a>
-                    <a class="btn btn-sm btn-danger" href="{% url 'delete_product' product.id %}">Delete</a>
-                </td>
+         <td>
+    <a class="btn btn-sm btn-primary me-1" href="#" onclick="showPasswordPrompt('{% url 'edit_product' product.id %}', 'edit')">Edit</a>
+    <a class="btn btn-sm btn-danger" href="#" onclick="showPasswordPrompt('{% url 'delete_product' product.id %}', 'delete')">Delete</a>
+</td>
             </tr>
             {% endfor %}
         {% else %}
@@ -44,16 +44,25 @@
 <div class="text-center mt-4">
     <button type="button" class="btn btn-primary btn-lg" onclick="showPasswordPrompt()">Add Product</button>
 </div>
+
 <script>
-function showPasswordPrompt() {
-  setTimeout(function() {
-    var password = window.prompt("Enter admin password to add product:");
+function showPasswordPrompt(url, action) {
+    // Prevent immediate navigation
+    event.preventDefault();
+    
+    // Set appropriate action text
+    var actionText = {
+        'add': 'add product',
+        'edit': 'edit product', 
+        'delete': 'delete product'
+    }[action] || 'perform this action';
+    
+    var password = window.prompt("Enter admin password to " + actionText + ":");
     if (password === "2005") {
-      window.location.href = "{% url 'add_product' %}";
+        window.location.href = url;
     } else if (password !== null) {
-      window.alert("Access denied! Only admin can add products.");
+        window.alert("Access denied! Only admin can " + actionText + ".");
     }
-  }, 100);
 }
 </script>
 {% endblock content %}
