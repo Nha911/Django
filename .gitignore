@@ -9,7 +9,7 @@ __pycache__/
 db.sqlite3
 manage.py
 migrations/
-static/
+# static/  # <-- Commented out to allow static folder in git
 src/
 
 # Node.js files

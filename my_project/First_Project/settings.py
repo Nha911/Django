@@ -122,6 +122,10 @@ STATICFILES_DIRS = [
     BASE_DIR / 'my_web_app' / 'static',
 ]
 
+# Add these lines for media (uploaded files)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 

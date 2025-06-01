@@ -16,15 +16,23 @@ def add_category(request):
 
 
 def add_product(request):
+    from .models import ProductImage
     if request.method == 'POST':
         name = request.POST['name']
         price = request.POST['price']
         stock = request.POST['stock']
-        Product.objects.create(
+        image_url = request.POST.get('image', '').strip()
+        image_file = request.FILES.get('image_file')
+        product = Product.objects.create(
             name=name,
             price=price,
             stock=stock
         )
+        if image_file:
+            product.image = image_file
+            product.save()
+        if image_url:
+            ProductImage.objects.create(product=product, image_url=image_url)
         return redirect('product')
     return render(request, 'add_product.html')
 
@@ -86,21 +94,20 @@ def edit_product(request, product_id):
         product.stock = request.POST['stock']
         image_url = request.POST.get('image', '').strip()
         image_file = request.FILES.get('image_file')
-        saved = False
+        # Only update image if a new file is uploaded
         if image_file:
             product.image = image_file
             product.save()
-            saved = True
-        if image_url:
-            # Only add ProductImage if the URL is valid and not already present
+        # Only add ProductImage if a new URL is provided and not already present
+        elif image_url:
             if not ProductImage.objects.filter(product=product, image_url=image_url).exists():
                 ProductImage.objects.create(product=product, image_url=image_url)
-            saved = True
-        if not saved:
+            product.save()
+        # If neither, do not change image fields
+        else:
             product.save()
         return redirect('product')
 
-    # Pre-fill the image URL field with the latest ProductImage if it exists
     latest_image_url = product.images.last().image_url if product.images.exists() else ''
     return render(request, 'edit_product.html', {'product': product, 'latest_image_url': latest_image_url})
 
@@ -108,6 +115,20 @@ def Home(request):
     return render(request=request, template_name='home.html')
 
 def product(request):
+    import os
+    from django.conf import settings
     products = Product.objects.all().order_by('id')
+    # Check for missing image files and set image to None if missing
+    for p in products:
+        if p.image:
+            image_path = os.path.join(settings.MEDIA_ROOT, str(p.image))
+            if not os.path.isfile(image_path):
+                p.image = None
+        # If no image and at least one ProductImage, set image_url as a fallback attribute
+        if not p.image and p.images.exists():
+            p.fallback_image_url = p.images.first().image_url
+        else:
+            p.fallback_image_url = None
+    products = list(products)
     return render(request, 'product.html', {'products': products})
 

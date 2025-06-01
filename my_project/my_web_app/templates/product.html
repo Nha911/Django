@@ -49,17 +49,19 @@
     {% for product in products %}
     <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
         <div class="card h-100 shadow-sm rounded-lg border-0">
-            {% with product.images.all|first as img %}
-                {% if img %}
-                    <div class="mb-2">
-                        <img class="card-img-top p-2" style="height:80px;object-fit:contain;" src="{{ img.image_url }}" alt="product image" />
-                    </div>
-                {% else %}
-                    <div class="mb-2">
-                        <img class="card-img-top p-10" style="height:180px;object-fit:contain;" src="https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=" alt="product image" />
-                    </div>
-                {% endif %}
-            {% endwith %}
+            {% if product.image %}
+                <div class="mb-2">
+                    <img class="card-img-top p-2" style="height:250px;object-fit:contain;" src="{{ product.image.url }}" alt="product image" onerror="this.onerror=null;this.src='{{ product.fallback_image_url|default:'https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=' }}';" />
+                </div>
+            {% elif product.fallback_image_url %}
+                <div class="mb-2">
+                    <img class="card-img-top p-2" style="height:250px;object-fit:contain;" src="{{ product.fallback_image_url }}" alt="product image" onerror="this.onerror=null;this.src='https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=';" />
+                </div>
+            {% else %}
+                <div class="mb-2">
+                    <img class="card-img-top p-2" style="height:250px;object-fit:contain;" src="https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=" alt="product image" />
+                </div>
+            {% endif %}
             <div class="card-body text-center">
                 <h5 class="card-title mb-2">{{ product.name|default:"Product Name" }}</h5>
                 <p class="card-text text-success fw-bold mb-2" style="font-size:1.2rem;">${{ product.price }}</p>
