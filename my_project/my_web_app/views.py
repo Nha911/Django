@@ -132,3 +132,11 @@ def product(request):
     products = list(products)
     return render(request, 'product.html', {'products': products})
 
+def shop_products(request):
+    products = Product.objects.all().order_by('id')
+    return render(request, 'shop_products.html', {'products': products})
+
+def product_table(request):
+    products = Product.objects.all().order_by('id')
+    return render(request, 'table.html', {'products': products})
+
