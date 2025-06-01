@@ -91,11 +91,11 @@
                                 href="{% url 'shop_products' %}"
                                 aria-current="{% if request.resolver_match.url_name == 'shop_products' %}page{% endif %}">Shop</a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link {% if request.resolver_match.url_name == 'product_table' %}active{% endif %} text-white"
                                 href="{% url 'product_table' %}"
                                 aria-current="{% if request.resolver_match.url_name == 'product_table' %}page{% endif %}">Table</a>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
                             <a class="nav-link {% if request.resolver_match.url_name == 'product' %}active{% endif %} text-white"
                                 href="{% url 'product' %}"
