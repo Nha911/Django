@@ -25,3 +25,7 @@ tests.py
 
 # Markdown/Docs
 node.md
+
+# Media files
+media/
+!media/product_images/
