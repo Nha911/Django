@@ -86,6 +86,16 @@
                                 href="{% url 'category' %}"
                                 aria-current="{% if request.resolver_match.url_name == 'category' %}page{% endif %}">Category</a>
                         </li>
+                            <li class="nav-item">
+                            <a class="nav-link {% if request.resolver_match.url_name == 'shop_products' %}active{% endif %} text-white"
+                                href="{% url 'shop_products' %}"
+                                aria-current="{% if request.resolver_match.url_name == 'shop_products' %}page{% endif %}">Shop</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.resolver_match.url_name == 'product_table' %}active{% endif %} text-white"
+                                href="{% url 'product_table' %}"
+                                aria-current="{% if request.resolver_match.url_name == 'product_table' %}page{% endif %}">Table</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link {% if request.resolver_match.url_name == 'product' %}active{% endif %} text-white"
                                 href="{% url 'product' %}"
@@ -106,6 +116,7 @@
                                 href="{% url 'admin' %}"
                                 aria-current="{% if request.resolver_match.url_name == 'admin' %}page{% endif %}">Admin</a>
                         </li>
+                    
                     </ul>
                 </div>
             </div>
@@ -135,6 +146,9 @@
         <div class="container">
             <div class="mb-2">&copy; {{ now|default:2025 }} POS 208. All rights reserved.</div>
             <div>Built with Django, Bootstrap, and Tailwind CSS.</div>
+            <div class="mt-2">
+                <a href="https://github.com/Nha911/Django" target="_blank" class="text-white-50 small">View on GitHub</a>
+            </div>
         </div>
     </footer>
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
