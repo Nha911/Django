@@ -23,4 +23,5 @@ urlpatterns = [
 
 '''secound index
     localhost:8000/a/b
+    localhost:8000/a/b
 '''

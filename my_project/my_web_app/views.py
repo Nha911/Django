@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 import os
 from django.conf import settings
 # views.py (write logic using those models)
+# views.py (write logic using those models)
 
 def about(request):
     return render(request=request, template_name='about.html')

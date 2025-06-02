@@ -3,6 +3,7 @@ from django.db import models
 # Create your models here.
 
 # models.py (define your data structure)
+# models.py (define your data structure)
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
