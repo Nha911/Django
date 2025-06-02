@@ -22,7 +22,9 @@ admin.py
 apps.py
 models.py
 tests.py
-
+views.py
+urls.py
+models.py
 # Markdown/Docs
 node.md
 
