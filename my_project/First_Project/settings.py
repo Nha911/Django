@@ -16,6 +16,14 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+# settings.py
+import os
+from dotenv import load_dotenv
+
+load_dotenv()  # អានឯកសារ .env
+SECRET_KEY = os.getenv('SECRET_KEY')  # យកតម្លៃពី .env
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
