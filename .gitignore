@@ -27,6 +27,6 @@ tests.py
 node.md
 
 # Media files
-
+media/
 !media/product_images/
 management/
