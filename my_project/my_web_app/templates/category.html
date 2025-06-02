@@ -10,7 +10,7 @@
     <table class="table table-bordered table-hover table-striped table-sm align-middle text-center">
         <thead class="table-dark">
             <tr>
-                <th>Observer​ ID</th>
+                <!-- <th>Observer​ ID</th> -->
                 <th>Name</th>
                 <th>Actions</th>
             </tr>
@@ -19,7 +19,7 @@
             {% if categories %}
                 {% for category in categories %}
                 <tr>
-                    <td>{{ category.id }}</td>
+                    <!-- <td>{{ category.id }}</td> -->
                     <td>{{ category.name }}</td>
                     <td>
                         <a class="btn btn-sm btn-primary me-1" href="{% url 'edit_category' category.id %}">Edit</a>
@@ -29,7 +29,7 @@
                 {% endfor %}
             {% else %}
                 <tr>
-                    <td colspan="3" class="text-center">No category data available.</td>
+                    <td colspan="2" class="text-center">No category data available.</td>
                 </tr>
             {% endif %}
         </tbody>
