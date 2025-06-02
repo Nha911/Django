@@ -19,6 +19,7 @@ class Product(models.Model):
     # image = models.URLField(blank=True, null=True)
     def __str__(self):
         return self.name
+    
 
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, related_name='images', on_delete=models.CASCADE)

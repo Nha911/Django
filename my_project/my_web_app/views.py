@@ -1,7 +1,8 @@
 from django.shortcuts import render, HttpResponse, redirect
 from .models import Category, Product, ProductImage
 from django.contrib.auth.decorators import login_required, user_passes_test
-
+import os
+from django.conf import settings
 # views.py (write logic using those models)
 
 def about(request):
@@ -15,16 +16,17 @@ def add_category(request):
     return render(request, 'add_category.html')
 
 
+
 def add_product(request):
     from .models import ProductImage
     if request.method == 'POST':
-        name = request.POST['name']
-        price = request.POST['price']
-        stock = request.POST['stock']
+        price = request.POST.get('price', '').strip()
+        stock = request.POST.get('stock', '').strip()
         image_url = request.POST.get('image', '').strip()
         image_file = request.FILES.get('image_file')
+        # Remove name, but set a default value to satisfy DB constraint
         product = Product.objects.create(
-            name=name,
+            name='Product',
             price=price,
             stock=stock
         )
@@ -89,7 +91,7 @@ def edit_product(request, product_id):
         return HttpResponse("Product not found", status=404)
 
     if request.method == 'POST':
-        product.name = request.POST['name']
+        # product.name = request.POST['name']
         product.price = request.POST['price']
         product.stock = request.POST['stock']
         image_url = request.POST.get('image', '').strip()
@@ -115,8 +117,7 @@ def Home(request):
     return render(request=request, template_name='home.html')
 
 def product(request):
-    import os
-    from django.conf import settings
+   
     products = Product.objects.all().order_by('id')
     # Check for missing image files and set image to None if missing
     for p in products:
@@ -133,7 +134,25 @@ def product(request):
     return render(request, 'product.html', {'products': products})
 
 def shop_products(request):
+    import os
+    from django.conf import settings
     products = Product.objects.all().order_by('id')
+    for p in products:
+        # Check if uploaded image exists
+        if p.image:
+            image_path = os.path.join(settings.MEDIA_ROOT, str(p.image))
+            if not os.path.isfile(image_path):
+                p.image = None
+        # Always try to show up to 4 images: uploaded image, then up to 3 ProductImage URLs
+        p.display_images = []
+        if p.image:
+            p.display_images.append(p.image.url)
+        for img in p.images.all()[:4-len(p.display_images)]:
+            p.display_images.append(img.image_url)
+        # Fill with placeholder if less than 4
+        while len(p.display_images) < 4:
+            p.display_images.append('https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=')
+    products = list(products)
     return render(request, 'shop_products.html', {'products': products})
 
 def product_table(request):
