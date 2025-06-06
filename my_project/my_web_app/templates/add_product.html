@@ -4,35 +4,29 @@
 {% block title %}Add Product{% endblock title %}
 
 {% block content %}
-<div class="container py-5">
-    <h2 class="mb-4 text-center">Add Product</h2>
-    <form method="post" enctype="multipart/form-data" class="mx-auto" style="max-width: 600px;">
-        {% csrf_token %}
-        <div class="mb-3">
-            <label class="form-label">Price</label>
-            <input type="number" step="0.01" name="price" class="form-control" required>
-        </div>
-                <!-- <div class="mb-3">
-            <label class="form-label">Price</label>
-            <input type="number" step="0.01" name="price" class="form-control" required>
-        </div> -->
-        <div class="mb-3">
-            <label class="form-label">Stock</label>
-            <input type="number" name="stock" class="form-control" required>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Image URL (optional)</label>
-            <input type="url" name="image" class="form-control" placeholder="https://example.com/image.png">
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Or Upload Image (optional)</label>
-            <input type="file" name="image_file" class="form-control" accept="image/*">
-        </div>
-
-        <div class="d-flex justify-content-between">
-            <button type="submit" class="btn btn-success">Add</button>
-            <a href="{% url 'product' %}" class="btn btn-secondary">Back to Product List</a>
-        </div>
-    </form>
-</div>
+<section class="py-5">
+    <div class="container">
+        <h2 class="fw-bold mb-4 text-white">Add Product</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="name" class="form-label text-white">Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="price" class="form-label text-white">Price</label>
+                <input type="number" step="0.01" class="form-control" id="price" name="price" required>
+            </div>
+            <div class="mb-3">
+                <label for="stock" class="form-label text-white">Stock</label>
+                <input type="number" class="form-control" id="stock" name="stock" required>
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label text-white">Image</label>
+                <input type="file" class="form-control" id="image" name="image">
+            </div>
+            <button type="submit" class="btn btn-primary">Add Product</button>
+        </form>
+    </div>
+</section>
 {% endblock content %}

@@ -8,67 +8,150 @@
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="{% static 'image/bbu.png' %}" type="image/x-icon">
-
     <style>
         body {
             font-family: 'Montserrat', Arial, sans-serif;
-            background: #f8f9fa;
+            background: linear-gradient(120deg, #6366f1 0%, #38bdf8 100%);
+            min-height: 100vh;
         }
 
-        .hero-section {
-            background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+        .demo-navbar {
+            background: #111827 !important;
+            color: #fff !important;
+            border-bottom: 1px solid #222;
+            box-shadow: 0 2px 8px rgba(56, 189, 248, 0.04);
+            backdrop-filter: blur(8px);
+        }
+
+        .demo-navbar .navbar-brand {
+            color: #a5b4fc !important;
+            font-weight: 700;
+            font-size: 1.7rem;
+            letter-spacing: 1px;
+        }
+
+        .demo-navbar .nav-link {
+            color: #fff !important;
+            margin-right: 1.2rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .demo-navbar .nav-link.active,
+        .demo-navbar .nav-link:hover {
+            color: #6366f1 !important;
+        }
+
+        .demo-navbar .navbar-toggler {
+            border: none;
+        }
+
+        .demo-navbar .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(99,102,241,0.7)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        .demo-navbar .navbar-nav {
+            align-items: center;
+        }
+
+        .demo-navbar .nav-item:last-child .nav-link {
+            margin-right: 0;
+        }
+
+        .demo-navbar .navbar-brand img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .main-content {
+            margin-top: 40px;
+        }
+
+        .demo-hero {
+            background: linear-gradient(90deg, #6366f1 0%, #38bdf8 100%);
             color: #fff;
-            padding: 60px 0 40px 0;
-            border-radius: 0 0 40px 40px;
-            box-shadow: 0 4px 24px rgba(67, 233, 123, 0.1);
+            padding: 64px 0 48px 0;
+            border-radius: 0 0 32px 32px;
+            box-shadow: 0 4px 24px rgba(99, 102, 241, 0.08);
         }
 
-        .hero-title {
+        .demo-hero .hero-title {
             font-size: 2.8rem;
             font-weight: 700;
         }
 
-        .hero-subtitle {
-            font-size: 1.3rem;
+        .demo-hero .hero-subtitle {
+            font-size: 1.2rem;
             font-weight: 400;
         }
 
-        .navbar {
-            box-shadow: 0 2px 8px rgba(67, 233, 123, 0.08);
+        .demo-hero .hero-btn {
+            background: #fff;
+            color: #6366f1;
+            border: none;
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 0.75rem 2rem;
+            margin-right: 1rem;
+            transition: background 0.2s, color 0.2s;
         }
 
-        .card {
-            border-radius: 1.5rem !important;
-            box-shadow: 0 2px 16px rgba(67, 233, 123, 0.08);
+        .demo-hero .hero-btn:hover {
+            background: #6366f1;
+            color: #fff;
+        }
+
+        .demo-hero .hero-btn-outline {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 0.75rem 2rem;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .demo-hero .hero-btn-outline:hover {
+            background: #fff;
+            color: #6366f1;
         }
 
         footer {
-            background: #222;
+            background: #111827;
             color: #fff;
-            padding: 24px 0;
+            padding: 2rem 0;
             margin-top: 48px;
-            border-radius: 40px 40px 0 0;
+            border-radius: 32px 32px 0 0;
+            border-top: 1px solid #222;
         }
     </style>
     <title>
         {% block title %}
-            base
+            Demo Web
         {% endblock title %}
     </title>
 </head>
 
-{% block blockname %}
-    
-{% endblock blockname %}
-    
-<body>
+<body style="background: #111827; min-height: 100vh; position: relative; overflow-x: hidden;">
+    <div id="sado-bg" style="pointer-events:none; position:fixed; inset:0; z-index:0; transition:opacity 0.3s;">
+        <!-- Sado (mouse-follow) effect will be rendered here -->
+    </div>
+    <script>
+    // Sado mouse-follow effect: radial gradient follows mouse
+    document.addEventListener('mousemove', function(e) {
+        var bg = document.getElementById('sado-bg');
+        var x = e.clientX;
+        var y = e.clientY;
+        bg.style.background = `radial-gradient(600px at ${x}px ${y}px, rgba(99,102,241,0.15), transparent 80%)`;
+    });
+    </script>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-success">
-            <div class="container-fluid text-white">
-                <a class="navbar-brand text-white fw-bold d-flex align-items-center" href="{% url 'home' %}"
-                    style="font-size:1.5rem;">
-                    <img src="{% static 'image/bbu.png' %}" alt="Logo" style="height: 40px; margin-right: 10px;">
-                    ROOM 208
+        <nav class="navbar navbar-expand-lg demo-navbar shadow-sm sticky-top"
+            style="background:#111827 !important;color:#fff !important;backdrop-filter:blur(8px);">
+            <div class="container-fluid">
+                <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
+                    <img src="{% static 'image/bbu.png' %}" alt="Logo" style="height:40px; margin-right:10px;">
+                    TK Accessories
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,64 +160,67 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %} text-white"
-                                href="{% url 'home' %}"
-                                aria-current="{% if request.resolver_match.url_name == 'home' %}page{% endif %}">Home</a>
+                            <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}"
+                                href="{% url 'home' %}">Home</a>
+                        </li>
+                   
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.resolver_match.url_name == 'product_table' %}active{% endif %}"
+                                href="{% url 'product_table' %}">Table</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {% if request.resolver_match.url_name == 'category' %}active{% endif %} text-white"
-                                href="{% url 'category' %}"
-                                aria-current="{% if request.resolver_match.url_name == 'category' %}page{% endif %}">Category</a>
-                        </li>
-                            <li class="nav-item">
-                            <a class="nav-link {% if request.resolver_match.url_name == 'shop_products' %}active{% endif %} text-white"
-                                href="{% url 'shop_products' %}"
-                                aria-current="{% if request.resolver_match.url_name == 'shop_products' %}page{% endif %}">Shop</a>
-                        </li>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link {% if request.resolver_match.url_name == 'product_table' %}active{% endif %} text-white"
-                                href="{% url 'product_table' %}"
-                                aria-current="{% if request.resolver_match.url_name == 'product_table' %}page{% endif %}">Table</a>
-                        </li> -->
-                        <li class="nav-item">
-                            <a class="nav-link {% if request.resolver_match.url_name == 'product' %}active{% endif %} text-white"
-                                href="{% url 'product' %}"
-                                aria-current="{% if request.resolver_match.url_name == 'product' %}page{% endif %}">Product</a>
+                            <a class="nav-link {% if request.resolver_match.url_name == 'product' %}active{% endif %}"
+                                href="{% url 'product' %}">Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %} text-white"
-                                href="{% url 'about' %}"
-                                aria-current="{% if request.resolver_match.url_name == 'about' %}page{% endif %}">About</a>
+                            <a class="nav-link {% if request.resolver_match.url_name == 'category' %}active{% endif %}"
+                                href="{% url 'category' %}">Categories</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %} text-white"
-                                href="{% url 'contact' %}"
-                                aria-current="{% if request.resolver_match.url_name == 'contact' %}page{% endif %}">Contact</a>
+                            <a class="nav-link {% if request.resolver_match.url_name == 'brand' %}active{% endif %}"
+                                href="{% url 'brand' %}">Brand</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {% if request.resolver_match.url_name == 'admin' %}active{% endif %} text-white"
-                                href="{% url 'admin' %}"
-                                aria-current="{% if request.resolver_match.url_name == 'admin' %}page{% endif %}">Admin</a>
+                            <a class="nav-link {% if request.resolver_match.url_name == 'supplier' %}active{% endif %}"
+                                href="{% url 'supplier' %}">Supplier</a>
                         </li>
-                    
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.resolver_match.url_name == 'customer' %}active{% endif %}"
+                                href="{% url 'customer' %}">Customer</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.resolver_match.url_name == 'productreview' %}active{% endif %}"
+                                href="{% url 'productreview' %}">ProductReview</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}"
+                                href="{% url 'contact' %}">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.resolver_match.url_name == 'admin' %}active{% endif %}"
+                                href="{% url 'admin' %}">Admin</a>
+                        </li>
+                             <li class="nav-item">
+                            <a class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}"
+                                href="{% url 'about' %}">About</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
         {% if request.resolver_match.url_name == 'home' %}
-        <section class="hero-section text-center">
+        <!-- <section class="demo-hero text-center"
+            style="background: linear-gradient(90deg, #6366f1 0%, #38bdf8 100%); color: #fff;">
             <div class="container">
-                <img src="../static/image/photo.jpg" alt="Hero" class="img-fluid rounded mb-4" style="max-height: 260px;">
                 <div class="hero-title mb-3">Welcome to TK Accessories Cambodia</div>
-                <div class="hero-subtitle mb-4">Manage your products and categories with ease.<br>Fast, beautiful, and
-                    built for business.</div>
-                <a href="{% url 'product' %}" class="btn btn-light btn-lg fw-bold me-2">View Products</a>
-                <a href="{% url 'category' %}" class="btn btn-outline-light btn-lg fw-bold">View Categories</a>
+                <div class="hero-subtitle mb-4">Modern, clean, and beautiful UI for your shop and management.</div>
+                <a href="{% url 'product' %}" class="hero-btn">View Products</a>
+                <a href="{% url 'category' %}" class="hero-btn-outline">View Categories</a>
             </div>
-        </section>
+        </section> -->
         {% endif %}
     </header>
-    <main>
+    <main class="main-content">
         <div class="container py-4">
             {% block content %}
             {% endblock content %}
@@ -142,17 +228,45 @@
         {% block main %}
         {% endblock main %}
     </main>
-    <footer class="text-center">
+    <footer class="text-center"
+        style="background:#111827;color:#fff;padding:2rem 0;margin-top:48px;border-radius:32px 32px 0 0;border-top:1px solid #222;">
         <div class="container">
-            <div class="mb-2">&copy; {{ now|default:2025 }} POS 208. All rights reserved.</div>
-            <div>Built with Django, Bootstrap, and Tailwind CSS.</div>
-            <div class="mt-2">
-                <a href="https://github.com/Nha911/Django" target="_blank" class="text-white-50 small">View on GitHub</a>
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <h5 class="fw-bold">TK Accessories</h5>
+                    <p class="text-muted">Streamlining your workflow, one task at a time.</p>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <h6 class="fw-bold">Product</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'product' %}" class="text-muted">Products</a></li>
+                        <li><a href="{% url 'category' %}" class="text-muted">Categories</a></li>
+                        <li><a href="{% url 'brand' %}" class="text-muted">Brands</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <h6 class="fw-bold">Company</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'about' %}" class="text-muted">About Us</a></li>
+                        <li><a href="{% url 'contact' %}" class="text-muted">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <h6 class="fw-bold">Connect</h6>
+                    <div class="d-flex gap-2">
+                        <a href="#" class="text-muted"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-muted"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="text-muted"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-muted"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4 pt-3 border-top border-secondary text-center text-muted">
+                &copy; {{ now|default:2025 }} TK Accessories Cambodia. All rights reserved.
             </div>
         </div>
     </footer>
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-    <!-- <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script> -->
 </body>
 
 </html>

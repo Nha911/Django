@@ -1,42 +1,66 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Category Page
+Categories
 {% endblock title %}
 
 {% block content %}
-    <h1 class="text-center my-4">Observer</h1>
-    <div class="table-responsive">
-    <table class="table table-bordered table-hover table-striped table-sm align-middle text-center">
-        <thead class="table-dark">
-            <tr>
-                <!-- <th>Observer​ ID</th> -->
-                <th>Name</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% if categories %}
-                {% for category in categories %}
-                <tr>
-                    <!-- <td>{{ category.id }}</td> -->
-                    <td>{{ category.name }}</td>
-                    <td>
-                        <a class="btn btn-sm btn-primary me-1" href="{% url 'edit_category' category.id %}">Edit</a>
-                        <a class="btn btn-sm btn-danger" href="{% url 'delete_category' category.id %}">Delete</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            {% else %}
-                <tr>
-                    <td colspan="2" class="text-center">No category data available.</td>
-                </tr>
-            {% endif %}
-        </tbody>
-    </table>
+<section class="py-5">
+    <div class="container">
+        <h2 class="fw-bold mb-4 text-white">Categories</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped align-middle text-center bg-white">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for category in categories %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ category.name }}</td>
+                        <td>
+                            <a class="btn btn-primary btn-sm"
+                               onclick="showPasswordPrompt('{% url 'edit_category' category.id %}', 'edit')">Edit</a>
+                            <a class="btn btn-danger btn-sm"
+                               onclick="showPasswordPrompt('{% url 'delete_category' category.id %}', 'delete')">Delete</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="3" class="text-center">No category data available.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center mt-4">
+            <a href="{% url 'add_category' %}" class="btn btn-primary btn-lg"
+                onclick="showPasswordPrompt('{% url 'add_category' %}', 'add')">Add Category</a>
+        </div>
     </div>
-    <div class="text-center mt-4">
-        <a href="{% url 'add_category' %}" class="btn btn-primary btn-lg">Add Category</a>
-        <!-- <a href="{% url 'add_category' %}" class="btn btn-primary btn-lg">Add Category</a> -->
-    </div>
+</section>
+<script>
+    function showPasswordPrompt(url, action) {
+        // Prevent immediate navigation
+        event.preventDefault();
+
+        // Set appropriate action text
+        var actionText = {
+            'add': 'add product',
+            'edit': 'edit product',
+            'delete': 'delete product'
+        }[action] || 'perform this action';
+
+        var password = window.prompt("Enter admin password to " + actionText + ":");
+        if (password === "2005") {
+            window.location.href = url;
+        } else if (password !== null) {
+            window.alert("Access denied! Only admin can " + actionText + ".");
+        }
+    }
+</script>
 {% endblock content %}

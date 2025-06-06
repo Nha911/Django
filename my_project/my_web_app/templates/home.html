@@ -3,14 +3,10 @@
 {% block title %}Home | Django 208{% endblock title %}
 
 {% block content %}
-    <div class="container mx-auto py-12">
-        <div class="flex justify-center">
-            <div class="w-full max-w-2xl text-center">
-                <h1 class="text-4xl font-bold mb-6">Welcome to Django 208</h1>
-                <p class="text-xl mb-4">This is the main content of the home page.</p>
-                <p class="mb-2">Here you can find various resources and links to other sections of the site.</p>
-                <p class="mb-2">Feel free to explore!</p>
-            </div>
-        </div>
+    <div class="py-5 text-center">
+        <h1 class="display-4 fw-bold mb-3 text-white">Welcome to TK Accessories Cambodia</h1>
+        <p class="lead mb-4 text-white">Modern, clean, and beautiful UI for your shop and management.</p>
+        <a href="{% url 'product' %}" class="btn btn-primary btn-lg me-2">View Products</a>
+        <a href="{% url 'category' %}" class="btn btn-outline-primary btn-lg">View Categories</a>
     </div>
 {% endblock content %}

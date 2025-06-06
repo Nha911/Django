@@ -19,6 +19,10 @@ urlpatterns = [
     path('category/delete/<int:category_id>/', views.delete_category, name='delete_category'),
     path('category/add/', views.add_category, name='add_category'),
     path('product/add/', views.add_product, name='add_product'),
+    path('brand/', views.brand, name='brand'),
+    path('supplier/', views.supplier, name='supplier'),
+    path('customer/', views.customer, name='customer'),
+    path('productreview/', views.productreview, name='productreview'),
 ]
 
 '''secound index

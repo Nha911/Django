@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
-{% block title %}Add Category{% endblock title %}
+{% block title %}Add Supplier{% endblock title %}
 {% block content %}
+
 <section class="py-5">
-                <style>
+    <div class="container text-center">
+        <h2 class="fw-bold mb-4 text-white">Add Supplier</h2>
+        <style>
             .text-white label,
             .text-white input,
             .text-white select,
@@ -17,15 +20,10 @@
                 background: rgba(255,255,255,0.08);
             }
         </style>
-    <div class="container">
-        <h2 class="fw-bold mb-4 text-white">Add Category</h2>
         <form method="post" class="d-inline-block text-start text-white" style="max-width:400px;width:100%">
             {% csrf_token %}
-            <div class="mb-3">
-                <label for="name" class="form-label text-white">Name</label>
-                <input type="text" class="form-control" id="name" name="name" required style="color:#fff;background:rgba(255,255,255,0.08);border-color:#6366f1;">
-            </div>
-            <button type="submit" class="btn btn-primary">Add Category</button>
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary mt-2 w-100">Add Supplier</button>
         </form>
     </div>
 </section>

@@ -160,3 +160,95 @@ def product_table(request):
     products = Product.objects.all().order_by('id')
     return render(request, 'table.html', {'products': products})
 
+def brand(request):
+    if request.method == 'POST':
+        from .models import Brand
+        from django import forms
+        class BrandForm(forms.ModelForm):
+            class Meta:
+                model = Brand
+                fields = ['name', 'description']
+        form = BrandForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('brand')
+    else:
+        from .models import Brand
+        from django import forms
+        class BrandForm(forms.ModelForm):
+            class Meta:
+                model = Brand
+                fields = ['name', 'description']
+        form = BrandForm()
+    brands = Brand.objects.all().order_by('id')
+    return render(request, 'brand.html', {'form': form, 'brands': brands})
+
+def supplier(request):
+    if request.method == 'POST':
+        from .models import Supplier
+        from django import forms
+        class SupplierForm(forms.ModelForm):
+            class Meta:
+                model = Supplier
+                fields = ['name', 'address', 'phone_number']
+        form = SupplierForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('supplier')
+    else:
+        from .models import Supplier
+        from django import forms
+        class SupplierForm(forms.ModelForm):
+            class Meta:
+                model = Supplier
+                fields = ['name', 'address', 'phone_number']
+        form = SupplierForm()
+    suppliers = Supplier.objects.all().order_by('id')
+    return render(request, 'supplier.html', {'form': form, 'suppliers': suppliers})
+
+def customer(request):
+    if request.method == 'POST':
+        from .models import Customer
+        from django import forms
+        class CustomerForm(forms.ModelForm):
+            class Meta:
+                model = Customer
+                fields = ['first_name', 'last_name', 'gender', 'phone_number', 'address']
+        form = CustomerForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('customer')
+    else:
+        from .models import Customer
+        from django import forms
+        class CustomerForm(forms.ModelForm):
+            class Meta:
+                model = Customer
+                fields = ['first_name', 'last_name', 'gender', 'phone_number', 'address']
+        form = CustomerForm()
+    customers = Customer.objects.all().order_by('id')
+    return render(request, 'customer.html', {'form': form, 'customers': customers})
+
+def productreview(request):
+    if request.method == 'POST':
+        from .models import ProductReview
+        from django import forms
+        class ProductReviewForm(forms.ModelForm):
+            class Meta:
+                model = ProductReview
+                fields = ['barocde', 'name', 'price', 'stock', 'description', 'category_id', 'brand_id', 'product_id']
+        form = ProductReviewForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('productreview')
+    else:
+        from .models import ProductReview
+        from django import forms
+        class ProductReviewForm(forms.ModelForm):
+            class Meta:
+                model = ProductReview
+                fields = ['barocde', 'name', 'price', 'stock', 'description', 'category_id', 'brand_id', 'product_id']
+        form = ProductReviewForm()
+    productreviews = ProductReview.objects.all().order_by('id')
+    return render(request, 'productreview.html', {'form': form, 'productreviews': productreviews})
+

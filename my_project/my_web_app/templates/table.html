@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}Product Table{% endblock title %}
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <h2 class="fw-bold mb-4 text-white">Product Table</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped align-middle text-center bg-white">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Stock</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ product.name }}</td>
+                        <td>${{ product.price }}</td>
+                        <td>{{ product.stock }}</td>
+                        <td>
+                            <a class="btn btn-sm btn-primary me-1" onclick="showPasswordPrompt('{% url 'edit_product' product.id %}', 'edit')" href="#">Edit</a>
+                            <a class="btn btn-sm btn-danger" onclick="showPasswordPrompt('{% url 'delete_product' product.id %}', 'delete')" href="#">Delete</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="text-center">No product data available.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<script>
+    function showPasswordPrompt(url, action) {
+        // Prevent immediate navigation
+        event.preventDefault();
+
+        // Set appropriate action text
+        var actionText = {
+            'add': 'add product',
+            'edit': 'edit product',
+            'delete': 'delete product'
+        }[action] || 'perform this action';
+
+        var password = window.prompt("Enter admin password to " + actionText + ":");
+        if (password === "2005") {
+            window.location.href = url;
+        } else if (password !== null) {
+            window.alert("Access denied! Only admin can " + actionText + ".");
+        }
+    }
+</script>
+{% endblock content %}

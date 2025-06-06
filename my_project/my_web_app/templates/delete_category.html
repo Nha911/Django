@@ -3,15 +3,15 @@
 {% block title %}Delete Category{% endblock title %}
 
 {% block content %}
-<div class="container py-5">
-    <h2 class="mb-4 text-center text-danger">Delete Category</h2>
-    <div class="alert alert-warning text-center">
-        <p>Are you sure you want to delete <strong>{{ category.name }}</strong>?</p>
-        <form method="post" class="d-inline">
+<section class="py-5">
+    <div class="container text-center">
+        <h2 class="fw-bold mb-4 text-white">Delete Category</h2>
+        <p class="text-white">Are you sure you want to delete <strong>{{ category.name }}</strong>?</p>
+        <form method="post">
             {% csrf_token %}
-            <button type="submit" class="btn btn-danger">Yes, Delete</button>
+            <button type="submit" class="btn btn-danger">Delete</button>
             <a href="{% url 'category' %}" class="btn btn-secondary ms-2">Cancel</a>
         </form>
     </div>
-</div>
+</section>
 {% endblock content %}

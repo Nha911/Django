@@ -1,28 +1,40 @@
 {% extends 'base.html' %}
-{% load static %}
-
-{% block title %}Contact Us{% endblock title %}
-
+{% block title %}Contact{% endblock title %}
 {% block content %}
-<script src="https://cdn.tailwindcss.com"></script>
-<nav class="bg-gray-100 p-10 font-sans">
-    <h1 class="text-3xl font-bold text-center mb-8">Contact Us</h1>
-    <form class="bg-white max-w-md mx-auto p-8 rounded-lg shadow" method="post">
-        <label for="name" class="block mb-2 font-semibold">Name:</label>
-        <input type="text" id="name" name="name" required
-            class="w-full mb-4 px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-black">
-
-        <label for="email" class="block mb-2 font-semibold">Email:</label>
-        <input type="email" id="email" name="email" required
-            class="w-full mb-4 px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-black">
-
-        <label for="message" class="block mb-2 font-semibold">Message:</label>
-        <textarea id="message" name="message" required
-            class="w-full mb-6 px-3 py-2 border border-gray-300 rounded min-h-[80px] resize-y focus:outline-none focus:ring-2 focus:ring-black"></textarea>
-        <button type="submit"
-            class="bg-black text-white px-6 py-2 rounded font-semibold hover:bg-gray-800 transition-colors w-full">
-            Send Message
-        </button>
-    </form>
-</nav>
+<section class="py-5">
+            <style>
+            .text-white label,
+            .text-white input,
+            .text-white select,
+            .text-white textarea {
+                color: #fff !important;
+                background: rgba(255,255,255,0.05);
+                border-color: #6366f1;
+            }
+            .text-white input,
+            .text-white select,
+            .text-white textarea {
+                background: rgba(255,255,255,0.08);
+            }
+        </style>
+    <div class="container">
+        <h2 class="fw-bold mb-4 text-white">Contact Us</h2>
+        <form method="post" class="text-white">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="name" class="form-label text-white">Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label text-white">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="message" class="form-label text-white">Message</label>
+                <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+    </div>
+</section>
 {% endblock content %}

@@ -1,32 +1,31 @@
 {% extends 'base.html' %}
-{% load static %}
-
 {% block title %}Edit Category{% endblock title %}
-
 {% block content %}
-<div class="container py-5">
-    <h2 class="mb-4 text-center">Edit Category</h2>
-    <form method="post" class="mx-auto" style="max-width: 500px;">
-        {% csrf_token %}
-        <div class="mb-3">
-            <label class="form-label">Name</label>
-            <input type="text" name="name" class="form-control" value="{{ category.name }}" required>
+<section class="py-5">
+    <div class="container">
+        <h2 class="fw-bold mb-4 text-white">Edit Category</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="name" class="form-label text-white">Name</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ category.name }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label text-white">Description</label>
+                <input type="text" class="form-control" id="description" name="description" value="{{ category.description }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="ID" class="form-label text-white">ID</label>
+                <input type="text" class="form-control" id="ID" name="ID" value="{{ category.id }}" required disabled>
+            </div>
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <a href="{% url 'category' %}" class="btn btn-secondary">Back to Category List</a>
+            </div>
+        </form>
+        <div class="text-center mt-4">
+            <a href="{% url 'category' %}?add=1" class="btn btn-success">Add Category</a>
         </div>
-        <div class="mb-3">
-            <label class="form-label">Description</label>
-            <input type="text" name="description" class="form-control" value="{{ category.description }}" required>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">ID</label>
-            <input type="text" name="ID" class="form-control" value="{{ category.id }}" required disabled>
-        </div>
-        <div class="d-flex justify-content-between">
-            <button type="submit" class="btn btn-success">Save</button>
-            <a href="{% url 'category' %}" class="btn btn-secondary">Back to Category List</a>
-        </div>
-    </form>
-    <div class="text-center mt-4">
-        <a href="{% url 'category' %}?add=1" class="btn btn-primary">Add Category</a>
     </div>
-</div>
+</section>
 {% endblock content %}

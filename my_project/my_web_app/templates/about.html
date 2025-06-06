@@ -1,40 +1,21 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}About | My Web App{% endblock title %}
+{% block title %}About Us | TK Accessories Cambodia{% endblock title %}
 
 {% block content %}
-<div class="container py-5">
-    <div class="row align-items-center">
-        <div class="col-md-6 mb-4 mb-md-0">
-            <img src="../static/image/moto.png"
-                class="img-fluid rounded-4 shadow" alt="About Us Image">
-        </div>
-        <div class="col-md-6">
-            <h1 class="mb-4 fw-bold" style="font-size:2.5rem; color:#43e97b;">About Web App</h1>
-            <p class="fs-5 text-dark mb-3">
-                Welcome to our modern Django web application!<br>
-                We combine technology and design to deliver a clean, responsive, and user-friendly experience for your
-                business.
-            </p>
-            <ul class="list-unstyled mb-4">
-                <li class="mb-2"><span class="fw-bold text-success">&#10003;</span> Category and Product management
-                    with full CRUD operations
-                </li>
-                <li class="mb-2"><span class="fw-bold text-success">&#10003;</span> Database-backed persistence for
-                    all data
-                </li>
-                <li class="mb-2"><span class="fw-bold text-success">&#10003;</span> Consistent navigation and layout
-                    across all pages
-                </li>
-                <li class="mb-2"><span class="fw-bold text-success">&#10003;</span> Modern UI using Bootstrap and
-                    Tailwind
-                </li>
-            </ul>
-            <div class="fs-5 fw-semibold text-secondary mb-2">Team 208 &mdash; Building reliable web solutions for
-                your business.
-            </div>
-        </div>
+<section class="py-5">
+    <div class="container">
+        <h2 class="fw-bold mb-4 text-white">About TK Accessories Cambodia</h2>
+        <p class="lead text-white">We are dedicated to providing the best motorcycle accessories and customer service in
+            Cambodia. Our modern platform streamlines your workflow and helps you manage your shop efficiently.
+        </p>
+        <ul class="list-unstyled mt-4 text-white">
+            <li class="mb-2"><strong>Mission:</strong> Empower shops with modern, easy-to-use management tools.</li>
+            <li class="mb-2"><strong>Vision:</strong> Be the leading provider of motorcycle shop solutions in the
+                region.
+            </li>
+        </ul>
     </div>
-</div>
+</section>
 {% endblock content %}
