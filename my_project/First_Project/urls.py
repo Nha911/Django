@@ -23,9 +23,9 @@ urlpatterns = [
     path('', include('my_web_app.urls')),# This line includes the URLs from the my_web_app app
     path('admin/', admin.site.urls)
 ]
-
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 
 '''frist index
     localhost:8001/Home/home
