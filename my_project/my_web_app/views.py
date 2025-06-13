@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
-from .models import Category, Product, ProductImage
+from .models import Category, Product, ProductImage, Brand, Supplier
 from django.contrib.auth.decorators import login_required, user_passes_test
 import os
 from django.conf import settings
@@ -118,7 +118,6 @@ def Home(request):
     return render(request=request, template_name='home.html')
 
 def product(request):
-   
     products = Product.objects.all().order_by('id')
     # Check for missing image files and set image to None if missing
     for p in products:

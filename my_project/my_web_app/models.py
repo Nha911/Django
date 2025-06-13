@@ -92,3 +92,4 @@ class ProductReview(models.Model):
     
     class Meta:
         verbose_name_plural = "Product Reviews"
+        
